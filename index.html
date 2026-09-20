@@ -482,7 +482,8 @@ function save(){
 const el = (t,c,x)=>{ const e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e; };
 const has = v => typeof v==='string' && v.trim()!=='';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const lines = s => String(s||'').split('\n').map(x=>x.trim()).filter(Boolean);
+/* 앞머리 기호를 떼고 센다 — 직접 "- " 를 찍어 넣는 사람이 많은데, 화면이 불릿을 또 붙여 "• -" 가 된다. */
+const lines = s => String(s||'').split('\n').map(x=>x.trim().replace(/^[-–—*·•]\s*/,'')).filter(Boolean);
 const chosen = () => D.fields.filter(f => f!=='none' && SPEC[f]);
 const fname = id => (FIELDS.find(f=>f.id===id)||{}).label || id;
 
